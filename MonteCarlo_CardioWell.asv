@@ -1,0 +1,12 @@
+
+
+wellSampleSize = 10;
+
+WellSample= WellImageClass;
+WellSample.initWellImage(wellSampleSize);
+
+for i = wellSample.numberOfBeads
+    x = 
+    y = 
+
+WellSample.imageAtTimet(1,wellSampleSize)

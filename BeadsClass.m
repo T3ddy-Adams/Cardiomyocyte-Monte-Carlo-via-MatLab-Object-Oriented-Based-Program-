@@ -1,0 +1,55 @@
+classdef BeadsClass 
+    properties
+        xCord                           % Coordinate in the X plane
+        yCord                           % Coordinate in the Y plane
+        Dead                            % Will this bead be moving, 1 true, 0 false
+        BeatFrequency                   % How fast we see change in the oscillation of the bead brightness
+        Brightness                      % current brightness of this bead as a function of time
+        MaxAmplitude                    % Max amplitude of the brightness of the bead  
+        InitialPhase                    % Randomized initial phase shift of the bead in terms of its oscillation (between 0 and 2π)
+    end 
+
+    methods
+
+        function obj = BeadsClass(xCord, yCord, Dead, BeatFrequency,Brightness, MaxAmplitude, InitialPhase) %initialization of the bead
+            obj.xCord = xCord;
+            obj.yCord = yCord;
+            obj.MaxAmplitude = MaxAmplitude;
+               
+            if Dead == 0
+                obj.Dead = Dead;
+                obj.BeatFrequency = 0;
+                obj.InitialPhase = 0;
+            else
+                obj.Dead = Dead;
+                obj.BeatFrequency = BeatFrequency;
+                obj.InitialPhase=InitialPhase;
+            end
+            obj.Brightness =Brightness;
+        end
+
+        function g = get.xCord(obj)
+            g = obj.xCord;
+        end
+
+        function g = get.yCord(obj)
+            g = obj.yCord;
+        end
+
+        function g = get.Brightness(obj)
+            g = obj.Brightness;
+        end
+
+        function obj = Set.Brightness(obj, time) % make the brightness a oscillation function of time with a frequency
+            w = obj.BeatFrequency;
+            A = obj.MaxAmplitude;
+            t = time; 
+            O = obj.InitialPhase;
+            s = A*cos(w*t + O);
+            obj.Brightness = s;
+        end 
+
+    end
+end
+
+
